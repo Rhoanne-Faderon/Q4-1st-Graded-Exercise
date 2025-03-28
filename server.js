@@ -1,31 +1,60 @@
-// Loads the express module
 const express = require("express");
-const hbs = require("hbs");
-
+const path = require("path");
 const bodyParser = require("body-parser");
 
-const path = require("path");
-
-//Creates our express server
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 
-//Serves static files (we need it to import a css file)
-app.use(express.static(path.join(__dirname, "public")));
+// Set up Handlebars as the view engine
 app.set("view engine", "hbs");
+app.set("views", path.join(__dirname, "views"));
+
+// Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public"))); // Ensure your CSS and assets are accessible
 
-//Sets a basic route
-
-// Render the initial page with the number input form
+// Routes
 app.get("/", (req, res) => {
   res.render("index");
 });
 
-// Create express route binder for draw.hbs and get the data from the url as parameters
-// that came from index.hbs
+app.post("/generate", (req, res) => {
+  const formData = req.body;
+  const { name, gender, number, ...guests } = formData;
 
+  // Convert number of guests to integer
+  const guestCount = parseInt(number, 10);
 
+  // Determine the pronoun based on gender
+  const pronoun = gender === "female" ? "she's" : "he's";
 
-//Makes the app listen to port 3000
-app.listen(port, () => console.log(`App listening to port ${port}`));
+  // Extract guest names dynamically
+  let guestList = [];
+  for (let i = 1; i <= guestCount; i++) {
+    if (guests[`guest${i}`]) {
+      guestList.push(guests[`guest${i}`]);
+    }
+  }
+
+  // Define the songs (split into words)
+  const happyBirthday = `Happy birthday to you Happy birthday to you Happy birthday dear ${name} Happy birthday to you!`.split(" ");
+  const goodFellow = `For ${pronoun} a jolly good fellow For ${pronoun} a jolly good fellow For ${pronoun} a jolly good fellow which nobody can deny!`.split(" ");
+
+  // Combine both songs
+  let allWords = [...happyBirthday, ...goodFellow];
+
+  // Assign words to guests in sequence
+  let assignedWords = [];
+  for (let i = 0; i < allWords.length; i++) {
+    let singer = guestList[i % guestList.length]; // Rotate through guests
+    assignedWords.push(`${singer}: ${allWords[i]}`);
+  }
+
+  // Render "happy" template with the assigned words
+  res.render("happy", { name, assignedWords });
+});
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
