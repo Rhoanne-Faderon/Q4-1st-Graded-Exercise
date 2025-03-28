@@ -13,56 +13,95 @@
 
   <div class="w3-bar w3-black">
     <a href="/" class="w3-bar-item w3-button w3-mobile">Home</a>
+    <a href="/happy" class="w3-bar-item w3-button w3-mobile">Happy</a>
   </div>
 
   <header class="w3-container">
-    <h1>Birthday Song Generator</h1>
-    <h2>Personalized Singing</h2>
+    <h1>Rhoanne Faderon - III-K - Jan 2025</h1>
+    <h2>Birthday</h2>
   </header>
 
   <section class="w3-container">
-    <h2>Enter Details</h2>
-    <form action="/generate" method="POST">
+    <h2>Input</h2>
 
-      <div class="w3-panel w3-card w3-padding">
-        <label for="name">Your Name:</label>
-        <input class="w3-input" type="text" id="name" name="name" required><br>
+    <div class="w3-row-padding">
+      <div class="w3-half">
+        <div class="w3-panel w3-card w3-padding">
+          <label for="name">Your nickname:</label>
+          <input class="w3-input" type="text" id="name" name="name" required><br>
 
-        <label>Gender:</label><br>
-        <input class="w3-radio" type="radio" id="male" name="gender" value="male" required>
-        <label for="male">Male</label> 
-        <input class="w3-radio" type="radio" id="female" name="gender" value="female" required>
-        <label for="female">Female</label> 
+          <label>Gender:</label><br>
+          <input class="w3-radio" type="radio" id="male" name="gender" value="male" required>
+          <label for="male">Male</label>
+          <input class="w3-radio" type="radio" id="female" name="gender" value="female" required>
+          <label for="female">Female</label>
+        </div>
       </div>
 
-      <div class="w3-panel w3-card w3-padding">
-        <label for="number">Number of Guests:</label>
-        <select class="w3-select w3-border" id="number" name="number" required onchange="generateGuestFields()">
-          <option value="">--Choose--</option>
-          <script>
-            for (let i = 1; i <= 16; i++) {
-              document.write(`<option value="${i}">${i}</option>`);
-            }
-          </script>
-        </select>
+      <div class="w3-half">
+        <div class="w3-panel w3-card w3-padding">
+          <label for="number">Number of close family and friends:</label>
+          <select class="w3-select w3-border" id="number" name="number" required onchange="generateGuestFields()">
+            <option value="">--Please choose a number--</option>
+            <script>
+              for (let i = 1; i <= 10; i++) {
+                document.write(`<option value="${i}">${i}</option>`);
+              }
+            </script>
+          </select>
+          <br><br>
+          <input class="w3-button w3-black" type="submit" value="Submit">
+        </div>
+      </div>
+    </div>
+
+    <div class="w3-row-padding">
+      <div class="w3-half">
+        <div class="w3-panel w3-card w3-padding">
+          <label for="name">Your nickname:</label>
+          <input class="w3-input" type="text" id="name" name="name" required><br>
+
+          <label>Gender:</label><br>
+          <input class="w3-radio" type="radio" id="male" name="gender" value="male" required>
+          <label for="male">Male</label>
+          <input class="w3-radio" type="radio" id="female" name="gender" value="female" required>
+          <label for="female">Female</label>
+        </div>
       </div>
 
-      <div id="guests"></div>
-
-      <input class="w3-button w3-black w3-margin" type="submit" value="Generate Song">
-      <input class="w3-button w3-black w3-margin" type="reset" value="Reset">
-    </form>
+      <div class="w3-half">
+        <div class="w3-panel w3-card w3-padding">
+          <label for="number">Number of close family and friends:</label>
+          <select class="w3-select w3-border" id="number2" name="number" required onchange="generateGuestFields()">
+            <option value="3" selected>3</option>
+          </select>
+          <br><br>
+          <label>Enter the name(s) of your invitees:</label>
+          <br>
+          <input class="w3-input w3-margin-bottom" type="text" name="guest1">
+          <input type="checkbox"> Going?
+          <br>
+          <input class="w3-input w3-margin-bottom" type="text" name="guest2">
+          <input type="checkbox"> Going?
+          <br>
+          <input class="w3-input w3-margin-bottom" type="text" name="guest3">
+          <input type="checkbox"> Going?
+          <br><br>
+          <input class="w3-button w3-black" type="submit" value="Submit">
+        </div>
+      </div>
+    </div>
   </section>
 
   <footer class="w3-container">
-    <p>&copy; 2024 Birthday Song Generator</p>
+    <p>&copy; 2025 rufaderon</p>
   </footer>
 
   <script>
     function generateGuestFields() {
       const num = document.getElementById('number').value;
       const container = document.getElementById('guests');
-      container.innerHTML = '<p>Enter the names of your guests:</p>';
+      container.innerHTML = '<p>Enter the names of your invitees:</p>';
 
       for (let i = 0; i < num; i++) {
         const input = document.createElement('input');
@@ -70,7 +109,14 @@
         input.name = 'guest' + (i + 1);
         input.className = 'w3-input w3-margin-bottom';
         input.placeholder = `Guest ${i + 1}`;
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.className = 'w3-margin-left';
+
         container.appendChild(input);
+        container.appendChild(checkbox);
+        container.appendChild(document.createElement('br'));
       }
     }
   </script>
