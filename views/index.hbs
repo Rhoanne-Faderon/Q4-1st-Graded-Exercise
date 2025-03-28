@@ -9,7 +9,7 @@
   <link href="/style.css" rel="stylesheet" type="text/css" />
 </head>
 
-<body class="w3-container w3-auto">
+<body class="w3-container w3-auto" style="background-color: #FFF7DC;">
 
   <div class="w3-bar w3-black">
     <a href="/" class="w3-bar-item w3-button w3-mobile">Home</a>
@@ -17,16 +17,16 @@
   </div>
 
   <header class="w3-container">
-    <h1>Rhoanne Faderon - III-K - Jan 2025</h1>
-    <h2>Birthday</h2>
+    <h1 style="color: #003366;">Rhoanne Faderon - III-K - Jan 2025</h1>
+    <h2 style="color: #003366;">Birthday</h2>
   </header>
 
   <section class="w3-container">
-    <h2>Input</h2>
+    <h2 style="color: #003366;">Input</h2>
 
     <div class="w3-row-padding">
       <div class="w3-half">
-        <div class="w3-panel w3-card w3-padding">
+        <div class="w3-panel w3-card w3-padding" style="background-color: #FFF2C0;">
           <label for="name">Your nickname:</label>
           <input class="w3-input" type="text" id="name" name="name" required><br>
 
@@ -39,7 +39,7 @@
       </div>
 
       <div class="w3-half">
-        <div class="w3-panel w3-card w3-padding">
+        <div class="w3-panel w3-card w3-padding" style="background-color: #FFF2C0;">
           <label for="number">Number of close family and friends:</label>
           <select class="w3-select w3-border" id="number" name="number" required onchange="generateGuestFields()">
             <option value="">--Please choose a number--</option>
@@ -57,20 +57,7 @@
 
     <div class="w3-row-padding">
       <div class="w3-half">
-        <div class="w3-panel w3-card w3-padding">
-          <label for="name">Your nickname:</label>
-          <input class="w3-input" type="text" id="name" name="name" required><br>
-
-          <label>Gender:</label><br>
-          <input class="w3-radio" type="radio" id="male" name="gender" value="male" required>
-          <label for="male">Male</label>
-          <input class="w3-radio" type="radio" id="female" name="gender" value="female" required>
-          <label for="female">Female</label>
-        </div>
-      </div>
-
-      <div class="w3-half">
-        <div class="w3-panel w3-card w3-padding">
+        <div id="guests" class="w3-panel w3-card w3-padding" style="background-color: #FFF2C0;">
           <label for="number">Number of close family and friends:</label>
           <select class="w3-select w3-border" id="number2" name="number" required onchange="generateGuestFields()">
             <option value="3" selected>3</option>
